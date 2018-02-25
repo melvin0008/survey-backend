@@ -14,8 +14,6 @@ app.server = http.createServer(app);
 // logger
 app.use(morgan('dev'));
 
-app.use(cors());
-
 app.use(bodyParser.json({
 	limit : config.bodyLimit
 }));
