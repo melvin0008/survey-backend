@@ -1,6 +1,7 @@
 import { version } from '../../package.json';
 import { Router } from 'express';
-import wallet from './wallet'
+import wallet from './wallet';
+import survey from './survey';
 
 export default ({ config, db }) => {
 	let api = Router();
@@ -10,6 +11,11 @@ export default ({ config, db }) => {
 		res.json({ version });
 	});
 
-	api.get('/wallet/:id', wallet.getBalance)
+	api.get('/wallet/:id', wallet.getBalance);
+
+	api.post('/survey/', survey.createSurvey);
+
+	api.post('/survey/take', survey.takeSurvey);
+
 	return api;
 }
