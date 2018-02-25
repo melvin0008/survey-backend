@@ -1,5 +1,8 @@
 {
 	"port": 8080,
 	"bodyLimit": "100kb",
-	"corsHeaders": ["Link"]
+	"corsHeaders": ["Link"],
+	"scriptHash": "b39c1e67363edb20d10b4986ee9d54f11265cf94",
+	"RESTEndpoint": "http://neo-privnet:5000",
+  "wif": "KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr"
 }
