@@ -1,20 +1,19 @@
 import resource from 'resource-router-middleware';
 import facets from '../models/facets';
-import { reward } from '../lib/blockchain';
+import { createSurveyTask, getRewardedTask } from '../lib/blockchain';
 
 function createSurvey(req, res) {
-  var postId = req.body.postId;
-  var surveyResult = req.body.surveyResult;
-  console.log(req.body)
-  res.setHeader("Content-Type", "application/json");
-  res.send(JSON.stringify(surveyResult));
-  // db.postResults(postId, surveyResult, function(result) {
-  //   sendJsonResult(res, result.json);
-  // });
+  //Add survey to mongodb
+  createSurveyTask(req.body.surveyId, req.body.totalSurveyers).then(result => {
+    sendJsonResult({result: result });
+  })
 }
 
 function takeSurvey(req, res) {
-  
+  //Add response to mongodb
+  getRewardedTask(req.body.surveyId, req.body.address).then(result => {
+    sendJsonResult({result: result });
+  })
 }
 
 function sendJsonResult(res, obj) {

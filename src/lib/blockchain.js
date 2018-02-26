@@ -12,6 +12,25 @@ export function getTokenBalance(address) {
   })
 }
 
+export function createSurveyTask(surveyId, totalSurveyers) {
+  return invokeContract('create_survey',[u.ab2hexstring(surveyId), totalSurveyers]).then(res => {
+    if (res.result.state === 'HALT, BREAK') {
+      console.log("Created Survey Successfully")
+      return true;
+    }
+  })
+}
+
+export function getRewardedTask(surveyId, address) {
+  let hashString = u.ab2hexstring(base58.decode(address))
+  return invokeContract('reward',[u.ab2hexstring(surveyId), hashString]).then(res => {
+    if (res.result.state === 'HALT, BREAK') {
+      console.log("Address has been rewarded")
+      return true;
+    }
+  })
+}
+
 const invokeContract = (operation, args) => {
   const props = {
     scriptHash: config.scriptHash,

@@ -14,15 +14,10 @@ app.server = http.createServer(app);
 // logger
 app.use(morgan('dev'));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors())
 
-app.use(bodyParser.json({
-	limit : config.bodyLimit
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // connect to db
 initializeDb( db => {
